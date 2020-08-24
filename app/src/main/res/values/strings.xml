@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">IMKBAPP</string>
+    <string name="something_went_wrong">Bir hata oluştu</string>
+    <string name="IMKB">IMKB Hisse Senetleri/Endeksler</string>
+</resources>

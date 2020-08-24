@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_view.xml"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.diren.veripark.ui.fragments.MainFragment"
+        android:label="Main Fragment"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/stockAndIndicesFragment"
+        android:name="com.diren.veripark.ui.fragments.StockAndIndicesFragment"
+        android:label="Hisse ve Endeskler"
+        tools:layout="@layout/fragment_stock_and_indices" />
+    <fragment
+        android:id="@+id/fallenListFragment"
+        android:name="com.diren.veripark.ui.fragments.FallenListFragment"
+        android:label="Hissesi Düşenler"
+        tools:layout="@layout/fragment_fallen_list" />
+    <fragment
+        android:id="@+id/thirtyByVolumeFragment"
+        android:name="com.diren.veripark.ui.fragments.ThirtyByVolumeFragment"
+        android:label="Hücre 30'a göre"
+        tools:layout="@layout/fragment_thirty_by_volume" />
+</navigation>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mainFragment"
+            android:title="Stock And Indices" />
+        <item
+            android:id="@+id/stockAndIndicesFragment"
+            android:title="Stock And Indices" />
+        <item
+            android:id="@+id/thirtyByVolumeFragment"
+            android:title="Hisse 30" />
+        <item
+            android:id="@+id/fallenListFragment"
+            android:title="Hissesi DÜşenler" />
+    </group>
+</menu>
