@@ -1,11 +1,15 @@
 package com.diren.veripark.ui.stocksAndIndices
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Base64.encode
 import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -20,15 +24,15 @@ import com.diren.veripark.databinding.StocksAndIndicesActivityBinding
 import com.diren.veripark.ext.observeEvent
 import kotlinx.android.synthetic.main.stocks_and_indices_activity.*
 import org.bouncycastle.jce.provider.BouncyCastleProvider
-import org.bouncycastle.util.encoders.Base64
 import java.io.UnsupportedEncodingException
 import java.security.InvalidKeyException
 import java.security.NoSuchAlgorithmException
 import java.security.Security
+import java.util.*
 import javax.crypto.*
 import javax.crypto.spec.SecretKeySpec
 
-abstract class StocksAndIndicesActivity : BaseActivity<StocksAndIndicesActivityBinding, StocksAndIndicesViewModel>(R.layout.stocks_and_indices_activity) {
+class StocksAndIndicesActivity : BaseActivity<StocksAndIndicesActivityBinding, StocksAndIndicesViewModel>(R.layout.stocks_and_indices_activity) {
     private lateinit var drawerLayout : DrawerLayout
     private lateinit var navController : NavController
     lateinit var appBarConfiguration : AppBarConfiguration
@@ -36,7 +40,7 @@ abstract class StocksAndIndicesActivity : BaseActivity<StocksAndIndicesActivityB
         super.onCreate(savedInstanceState)
 
         val fragmentDestinations = setOf(R.id.mainFragment, R.id.stockAndIndicesFragment, R.id.fallenListFragment, R.id.thirtyByVolumeFragment)
-        //appBarConfiguration = AppBarConfiguration(topLevelDestinationIds = fragmentDestinations, drawerLayout = drawerLayout)
+        appBarConfiguration = AppBarConfiguration(topLevelDestinationIds = fragmentDestinations, drawerLayout = drawerLayout)
         navController = findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(navController, appBarConfiguration)
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -46,7 +50,7 @@ abstract class StocksAndIndicesActivity : BaseActivity<StocksAndIndicesActivityB
      override fun onInitDataBinding() {
         viewBinding.viewModel = viewModel
         observeEvent(viewModel.event,::onViewEvent)
-      //  viewModel.getStocks()
+        //viewModel.getStocks()
     }
 
     override fun onNavigateUp(): Boolean {
@@ -69,17 +73,17 @@ abstract class StocksAndIndicesActivity : BaseActivity<StocksAndIndicesActivityB
         return super.onOptionsItemSelected(item)
     }
 
-        //navigation drawer kurayım dimi?
+    @SuppressLint("NewApi")
     private fun onViewEvent(event: StocksAndIndicesViewEvent){
         when(event){
             StocksAndIndicesViewEvent.ClickOnButton ->{
                //startActivity(MainActivity.newIntent(this))
-              //SplashViewEvent.HandShakeDecoder(data)
+
             }
             is StocksAndIndicesViewEvent.StockAES -> {
 
-                encrypt(event.data.aesKey, event.data.aesIV).also {
-                    Log.d("AESKEY",event.data.aesIV)
+                encrypt(event.data.aesKey,event.data.aesIV).also {
+                    Log.d("AESKEY",event.data.aesKey)
 
                     //startActivity(MainActivity.newIntent(this))
                 }
@@ -90,6 +94,8 @@ abstract class StocksAndIndicesActivity : BaseActivity<StocksAndIndicesActivityB
         fun newIntent(context: Context): Intent =
             Intent(context, StocksAndIndicesActivity::class.java)
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun encrypt(strToEncrypt: String, secret_key: String): String? {
         Security.addProvider(BouncyCastleProvider())
         var keyBytes: ByteArray
@@ -113,9 +119,10 @@ abstract class StocksAndIndicesActivity : BaseActivity<StocksAndIndicesActivityB
                 viewModel.preferenceManager.aesKey = decryptedString
                 viewModel.preferenceManager.aesIV =decryptedString
                 Log.d("AESKEY",decryptedString)
-                return String(
-                    Base64.encode(cipherText)
-                )
+
+          val encodedString: String =  Base64.getEncoder().encodeToString(cipherText)
+                  // Base64.encode(cipherText)
+                return encodedString
             }
         } catch (uee: UnsupportedEncodingException) {
             uee.printStackTrace()
@@ -135,4 +142,7 @@ abstract class StocksAndIndicesActivity : BaseActivity<StocksAndIndicesActivityB
 
         return null
     }
+
+
+
 }

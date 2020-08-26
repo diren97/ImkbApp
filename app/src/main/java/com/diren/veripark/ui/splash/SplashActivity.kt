@@ -16,7 +16,10 @@ import java.io.UnsupportedEncodingException
 import java.security.InvalidKeyException
 import java.security.NoSuchAlgorithmException
 import java.security.Security
+import java.util.*
 import javax.crypto.*
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.PBEKeySpec
 import javax.crypto.spec.SecretKeySpec
 
 
@@ -61,29 +64,30 @@ class SplashActivity :
             }
             is SplashViewEvent.HandShakeDecoder -> {
 
-                handShakeDecoder(event.data.aesKey, event.data.aesIV).also {
+               handShakeDecoder(event.data.aesKey, event.data.aesIV).also {
                     startActivity(MainActivity.newIntent(this))
                 }
             }
         }
-    }
 
+}
 
     @SuppressLint("GetInstance")
     fun handShakeDecoder(key: String, strToDecrypt: String?): String? {
         Security.addProvider(BouncyCastleProvider())
         var keyBytes: ByteArray
-
+        var ivBytes: ByteArray
         try {
             keyBytes = key.toByteArray(charset("UTF8"))
+            ivBytes = key.toByteArray(charset("UTF8"))
             val skey = SecretKeySpec(keyBytes, "AES")
+            val ivSpec = SecretKeySpec(ivBytes, "AES")
             val input = org.bouncycastle.util.encoders.Base64
                 .decode(strToDecrypt?.trim { it <= ' ' }?.toByteArray(charset("UTF8")))
 
             synchronized(Cipher::class.java) {
                 val cipher = Cipher.getInstance("AES/ECB/PKCS7Padding")
                 cipher.init(Cipher.DECRYPT_MODE, skey)
-
                 val plainText = ByteArray(cipher.getOutputSize(input.size))
                 var ptLength = cipher.update(input, 0, input.size, plainText, 0)
                 ptLength += cipher.doFinal(plainText, ptLength)
@@ -110,6 +114,6 @@ class SplashActivity :
         }
 
         return null
-    }}
+    } }
 
 
