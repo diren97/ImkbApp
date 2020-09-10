@@ -22,7 +22,8 @@ class SplashViewModel(
 
     private val _event = MutableLiveData<Event<SplashViewEvent>>()
     val event: LiveData<Event<SplashViewEvent>> = _event
-
+//livedata aktif olarak değişen verileri tutan evente ekleyen kısım
+    //mutablelive data ise setvalue ve getvalue metotlarını kullabilmemizi sağlar
     val test = MutableLiveData<String>()
 
     fun handShake(deviceInfo: DeviceInfo) = viewModelScope.launch {
@@ -30,7 +31,6 @@ class SplashViewModel(
         when (response) {
             is Result.Success -> {
                 preferenceManager.handShake = response.data
-
                 _event.postValue(Event(SplashViewEvent.HandShakeDecoder(response.data)))
 
             }

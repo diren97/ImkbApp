@@ -66,17 +66,9 @@ deps.safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:
 deps.data_binding = "com.android.databinding:compiler:$versions.data_binding"
 deps.lottie = "com.airbnb.android:lottie:$versions.lottie"
 deps.fab = "com.github.clans:fab:$versions.fab"
-deps.country_picker = "com.hbb20:ccp:$versions.country_picker"
 deps.drawable_toolbox = "com.github.duanhong169:drawabletoolbox:$versions.drawable_toolbox"
-deps.camera_view = "com.otaliastudios:cameraview:$versions.camera_view"
-deps.dots_indicator = "com.tbuonomo.andrui:viewpagerdotsindicator:$versions.dots_indicator"
-deps.cir = "com.tbuonomo.andrui:viewpagerdotsindicator:$versions.dots_indicator"
 deps.rounded_image = "com.makeramen:roundedimageview:$versions.rounded_image"
 deps.indicatorseekbar = "com.github.warkiz.widget:indicatorseekbar:$versions.indicatorseekbar"
-deps.contactpicker = "io.github.farhad:contactpicker:$versions.contactpicker"
-deps.link_builder = "com.klinkerapps:link_builder:$versions.link_builder"
-deps.photo_view = "com.github.chrisbanes:PhotoView:$versions.photo_view"
-deps.resizer = "com.github.hkk595:Resizer:$versions.resizer"
 
 // JAX-B dependencies for JDK 9+
 deps.jaxb = "javax.xml.bind:jaxb-api:$versions.jaxb"

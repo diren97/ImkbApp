@@ -3,7 +3,7 @@ package com.diren.veripark.ext
 import android.content.SharedPreferences
 import com.google.gson.Gson
 
-
+//extension uzantılar
 inline fun <reified T> SharedPreferences.get(key: String): T? {
 
     if (!this.contains(key)) {

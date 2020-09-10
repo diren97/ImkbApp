@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 
-
+//izin yardımcısı
 object PermissionHelper {
 
     val locationPermissions =

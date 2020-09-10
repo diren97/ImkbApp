@@ -10,6 +10,7 @@ import com.diren.veripark.utils.PreferenceManager
 import  com.diren.veripark.network.utils.Result
 
 interface ImkbRepository {
+    //ihtiyacı olduğunda suspend fun harekete geçer
     suspend fun handShake(request: DeviceInfo): Result<HandShakeResponse>
     suspend fun stock(period: StockRequest): Result<Stocks>
 }

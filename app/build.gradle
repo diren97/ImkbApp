@@ -99,7 +99,6 @@ dependencies {
     implementation deps.lottie
     implementation deps.fab
 
-    implementation deps.country_picker
     implementation deps.drawable_toolbox
 
     implementation deps.material_dialog.core
@@ -108,8 +107,6 @@ dependencies {
     implementation deps.material_dialog.input
 
 
-    implementation deps.camera_view
-    implementation deps.dots_indicator
 
     implementation deps.jaxb
     implementation deps.coil
@@ -119,10 +116,5 @@ dependencies {
 
     implementation deps.card_io
     implementation deps.zxing
-    implementation deps.indicatorseekbar
-    implementation deps.contactpicker
-    implementation deps.link_builder
-    implementation deps.resizer
-    implementation deps.photo_view
     implementation group: 'bouncycastle', name: 'bcprov-jdk16', version: '136'
 }

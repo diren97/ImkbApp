@@ -1,6 +1,4 @@
 package com.diren.veripark.main
-
-
 import android.annotation.SuppressLint
 import android.os.Build
 import android.provider.Settings
